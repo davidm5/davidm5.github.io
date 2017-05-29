@@ -1,7 +1,35 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Boat Registration</title>
+  <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+  <script src="./app.js"></script>
+</head>
 <body>
-<h1>Hello World</h1>
-<p>I'm hosted with GitHub Pages.</p>
+  <h1>Who Owns the Boat?</h1>
+  <br>
+  <h2>Example Truffle Dapp</h2>
+  <h3>Current owner: <span class="black"><span id="boatowner"></span></span></h3>
+  <h3>Current name: <span class="black"><span id="boatname"></span></span></h3>
+
+  <br>
+
+  <h1>Change name</h1>
+
+  <!--
+  <br><label for="newowner">New owner:</label><input type="text" id="newowner" placeholder="e.g., 0x93e66d9baea28c17d9fc393b53e3fbdd76899dae"></input>
+  <br><br><button id="register" onclick="App.register()">Register</button>
+  -->
+
+  <br><br><button id="rename" onclick="App.rename()">Rename</button>
+    <label for="newname">New name:</label><input type="text" id="newname" placeholder="e.g. SS Titanic"></input>
+  <!--  
+  <br><br><button id="transfer" onclick="App.transfer()">Transfer</button>
+  -->
+  <br><br><button id="kill" onclick="App.kill()">Terminate</button>
+  <br><br>
+  <span id="status"></span>
+  <br>
+  <span class="hint"><strong>Hint:</strong> open the browser developer console to view any errors and warnings.</span>
 </body>
 </html>
