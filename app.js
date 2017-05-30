@@ -27,7 +27,7 @@ var abiDef = [{"constant":false,"inputs":[{"name":"newName","type":"bytes32"}],"
 
 // instantiate a contract for transactions
 var Boat = web3.eth.contract(abiDef);
-var boat = Boat.at(0x2a1e664687271b0c6c04e8fe9fe940eff87f5750);
+var boat = Boat.at('0x2a1e664687271b0c6c04e8fe9fe940eff87f5750');
 
 // The following code is simple to show off interacting with your contracts.
 // As your needs grow you will likely need to change its form and structure.
