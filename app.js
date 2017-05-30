@@ -89,16 +89,26 @@ window.App = {
   
     console.log("In new showInfo function");
 
-    boat.getOwner.call().then(function(value) {
-      var owner_element = document.getElementById("boatowner");
-      owner_element.innerHTML = value.valueOf();
-      return boat.getName.call();
-    }).then(function(value){
-      var name_element = document.getElementById("boatname");
-      name_element.innerHTML = web3.toAscii(value.valueOf());
-    }).catch(function(e){
-      console.log(e);
-    });
+    boat.getOwner.call(function(error, value){
+        if(!error)
+            var owner_element = document.getElementById("boatowner");
+            owner_element.innerHTML = value.valueOf();
+            //return boat.getName.call();
+
+        else
+            console.error(error);
+    })
+
+////    boat.getOwner.call().then(function(value) {
+////      var owner_element = document.getElementById("boatowner");
+////      owner_element.innerHTML = value.valueOf();
+////      return boat.getName.call();
+////    }).then(function(value){
+////      var name_element = document.getElementById("boatname");
+////      name_element.innerHTML = web3.toAscii(value.valueOf());
+////    }).catch(function(e){
+////      console.log(e);
+////    });
 
   },
 
