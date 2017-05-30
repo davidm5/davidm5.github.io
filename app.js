@@ -103,7 +103,7 @@ window.App = {
     boat.getName.call(function(error, value){
         if(!error) {
             var name_element = document.getElementById("boatname");
-            name_element.innerHTML = value.valueOf();
+            name_element.innerHTML = web3.toAscii(value.valueOf());
             //return boat.getName.call();
            
         } else {
