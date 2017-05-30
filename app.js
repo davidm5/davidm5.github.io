@@ -90,13 +90,14 @@ window.App = {
     console.log("In new showInfo function");
 
     boat.getOwner.call(function(error, value){
-        if(!error)
+        if(!error) {
             var owner_element = document.getElementById("boatowner");
             owner_element.innerHTML = value.valueOf();
             //return boat.getName.call();
-
-        else
+           
+        } else {
             console.error(error);
+        }
     })
 
 ////    boat.getOwner.call().then(function(value) {
