@@ -22104,7 +22104,7 @@ var account;
 var abiDef = [{"constant":false,"inputs":[{"name":"newName","type":"bytes32"}],"name":"rename","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getName","outputs":[{"name":"boatName","type":"bytes32"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"kill","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getOwner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[{"name":"transferred","type":"bool"}],"payable":false,"type":"function"},{"inputs":[{"name":"boatName","type":"bytes32"}],"payable":false,"type":"constructor"}]
 
 // instantiate a contract for transactions
-var Boat = eth.contract(abiDef);
+var Boat = web3.contract(abiDef);
 var boat = Boat.at(0x2a1e664687271b0c6c04e8fe9fe940eff87f5750);
 
 // The following code is simple to show off interacting with your contracts.
