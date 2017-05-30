@@ -140,11 +140,24 @@ window.App = {
 
     console.log("My new name is ", newName);  // see if passing multiple variables to log works
 
-    boat.rename(newName, {from: account}).then(function(){
-      self.showInfo();
-    }).catch(function(e){
-      console.log(e);
-    });
+    boat.rename(newName, {from: account}, function(error){
+        if(!error) {
+            self.showInfo();
+           
+        } else {
+            console.error(error);
+        }
+    })
+
+
+
+
+////    boat.rename(newName, {from: account}).then(function(){
+////      self.showInfo();
+////    }).catch(function(e){
+////      console.log(e);
+////    });
+
   },
 
 
