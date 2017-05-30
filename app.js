@@ -1,4 +1,4 @@
-/******/ (function(modules) { // webpackBootstrap
+﻿/******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -22118,7 +22118,7 @@ window.App = {
     var self = this;
 
     // Bootstrap the Boat abstraction for Use.
-    Boat.setProvider(web3.currentProvider);
+    ////Boat.setProvider(web3.currentProvider);
 
     // Get the account.
     web3.eth.getAccounts(function(err, accs) {
