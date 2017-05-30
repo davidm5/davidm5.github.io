@@ -100,6 +100,19 @@ window.App = {
         }
     })
 
+    boat.getName.call(function(error, value){
+        if(!error) {
+            var name_element = document.getElementById("boatname");
+            name_element.innerHTML = value.valueOf();
+            //return boat.getName.call();
+           
+        } else {
+            console.error(error);
+        }
+    })
+
+
+
 ////    boat.getOwner.call().then(function(value) {
 ////      var owner_element = document.getElementById("boatowner");
 ////      owner_element.innerHTML = value.valueOf();
