@@ -56,6 +56,8 @@ window.App = {
 
       account = accs[0];
 
+	console.log(accs);
+
       // Get the particular deployed instance of 'Boat'
       ////Boat.deployed().then(function(instance){
       ////  boat = instance;
