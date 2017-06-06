@@ -1,46 +1,20 @@
 ﻿
-// Import the page's CSS. Webpack will know what to do with it.
 
-
-// Import libraries we need.
-
-
-
-// Import our contract artifacts and turn them into usable abstractions.
-////import boat_artifacts from '../../build/contracts/Boat.json'
-
-// Boat is our usable abstraction, which we'll use through the code below.
-////var Boat = contract(boat_artifacts);
-
+// Used to hold the default Ethereum account that will pay for transactions.
 var account;
 
-////var boat; // Specfic instance of the Boat contract - a 'handle' to use to call the contract functions.
-
-
-
-
-
-
-// obtain the abi definition for your contract
-//var info = eth.getContractInfo(0x2a1e664687271b0c6c04e8fe9fe940eff87f5750)
+// Set the abi definition for your contract
 var abiDef = [{"constant":false,"inputs":[{"name":"newName","type":"bytes32"}],"name":"rename","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getName","outputs":[{"name":"boatName","type":"bytes32"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"kill","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getOwner","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[{"name":"transferred","type":"bool"}],"payable":false,"type":"function"},{"inputs":[{"name":"boatName","type":"bytes32"}],"payable":false,"type":"constructor"}]
 
-// instantiate a contract for transactions
+// Instantiate a contract for transactions
 var Boat = web3.eth.contract(abiDef);
 var boat = Boat.at('0x2a1e664687271b0c6c04e8fe9fe940eff87f5750');
 
-// The following code is simple to show off interacting with your contracts.
-// As your needs grow you will likely need to change its form and structure.
-// For application bootstrapping, check out window.addEventListener below.
-
+// Here's the actual application part of the code
 window.App = {
-
 
   start: function() {
     var self = this;
-
-    // Bootstrap the Boat abstraction for Use.
-    ////Boat.setProvider(web3.currentProvider);
 
     // Get the account.
     web3.eth.getAccounts(function(err, accs) {
@@ -54,25 +28,16 @@ window.App = {
         return;
       }
 
+      // We're going to assume the first account we retrieve is the one to use; safe enough for 
+      // our purposes.    
       account = accs[0];
 
-	console.log(accs);
+      // And for reference we'll dump out the list of accounts we found to the console.    
+      console.log(accs);
 
-      // Get the particular deployed instance of 'Boat'
-      ////Boat.deployed().then(function(instance){
-      ////  boat = instance;
-      ////  console.log("Boat in contructor: ", boat);
-      ////}).then(function(){
-      ////  self.showInfo();
-      ////}).catch(function(e) {
-      ////  console.log(e);
-      ////});
-
-      self.showInfo(); ////New code reploaces above block
-
+      self.showInfo(); // Call the internal function to display the info about the boat.
 
     });
-  
   },
 
   // Function to terminate the contract
@@ -93,8 +58,6 @@ window.App = {
         if(!error) {
             var owner_element = document.getElementById("boatowner");
             owner_element.innerHTML = value.valueOf();
-            //return boat.getName.call();
-           
         } else {
             console.error(error);
         }
@@ -104,35 +67,18 @@ window.App = {
         if(!error) {
             var name_element = document.getElementById("boatname");
             name_element.innerHTML = web3.toAscii(value.valueOf());
-            //return boat.getName.call();
-           
         } else {
             console.error(error);
         }
     })
-
-
-
-////    boat.getOwner.call().then(function(value) {
-////      var owner_element = document.getElementById("boatowner");
-////      owner_element.innerHTML = value.valueOf();
-////      return boat.getName.call();
-////    }).then(function(value){
-////      var name_element = document.getElementById("boatname");
-////      name_element.innerHTML = web3.toAscii(value.valueOf());
-////    }).catch(function(e){
-////      console.log(e);
-////    });
-
   },
 
   register: function() {
-    //Dummy function placeholder
+    //Dummy function placeholder; when implemented it should be a way to add another boat to the list.
   },
 
 
-
-// Give the boat a new name.
+// Give the boat a new name.  Possible enhancement - only let the current owner change the name.
   rename: function() {
     var self = this;
 
@@ -142,34 +88,24 @@ window.App = {
 
     boat.rename(newName, {from: account}, function(error){
         if(!error) {
-            self.showInfo();
-           
+            self.showInfo();           
         } else {
             console.error(error);
         }
     })
-
-
-
-
-////    boat.rename(newName, {from: account}).then(function(){
-////      self.showInfo();
-////    }).catch(function(e){
-////      console.log(e);
-////    });
-
   },
 
 
   transfer: function() {
-    //Dummy function placeholder
+    //Dummy function placeholder - transfer owndership of the boat to another account
   },
 
 };
 
 
 window.addEventListener('load', function() {
-  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+  // Checking if Web3 has been injected by the browser (Mist/MetaMask).  This is the part where we
+  // establish a connection with an Ethereum node.	
   if (typeof web3 !== 'undefined') {
     console.warn("Using web3 detected from external source. If you find that your accounts don't appear or you have 0 MetaCoin, ensure you've configured that source properly. If using MetaMask, see the following link. Feel free to delete this warning. :) http://truffleframework.com/tutorials/truffle-and-metamask")
     // Use Mist/MetaMask's provider
@@ -177,6 +113,7 @@ window.addEventListener('load', function() {
   } else {
     console.warn("No web3 detected. Falling back to http://localhost:8545. You should remove this fallback when you deploy live, as it's inherently insecure. Consider switching to Metamask for development. More info here: http://truffleframework.com/tutorials/truffle-and-metamask");
     // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
+    //  Our fallback is to use a local node.
     window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
   }
 
