@@ -1,2 +1,2 @@
 # davidm5.github.io
-Just trying some stuff out.
+Demo of a simple Ethereum-based dapp.
